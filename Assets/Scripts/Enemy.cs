@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,21 +7,23 @@ public class Enemy: PlayableObject
 {
     public static int numberOfEnemies;
 
-    private string _name;
+    protected string _name;
 
-    [SerializeField]
-    private float _speed;
 
-    EEnemyType _enemyType;
+    protected EEnemyType _enemyType;
 
     protected Transform _target;
 
-    public Enemy()
+    [SerializeField]
+    private Bullet _bulletPrefab;
+
+
+    public void Awake()
     {
         AddEnemy();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         _target = GameObject.FindWithTag("Player").transform;    
     }
@@ -29,32 +32,44 @@ public class Enemy: PlayableObject
     {
         if (_target != null)
         {
-            
-            Move(_target.position);
+            Move(transform);
         }
         else
         {
-            Move(_speed);
+            Move(Vector2.up);
         }
     }
 
-    public override void Move(Vector3 direction, Vector2 target)
-    {
+    //public override void Move(Vector3 direction, Vector2 target)
+    //{
+    //    Vector2 diff;
+    //    Debug.Log(target);
+    //    diff = target - (Vector2)transform.position;
 
-    }
 
-    public override void Move(Vector2 direction)
-    {
-        transform.position = Vector2.MoveTowards(transform.position, _target.position, 0.01f);
-    }
+    //    // always face the enemy toward the player
+    //    float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg - 90;
+    //    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-    public override void Move(float speed)
-    {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-    }
+    //    //Move the enemy toward the player
+    //    direction = diff.normalized;
+    //    transform.position += direction * _speed * Time.deltaTime;
+
+    //}
+
+    //public override void Move(Vector2 direction)
+    //{
+    //    transform.position = Vector2.MoveTowards(transform.position, _target.position, 0.01f);
+    //}
+
+    //public override void Move(float speed)
+    //{
+    //    transform.Translate(Vector2.right * speed * Time.deltaTime);
+    //}
+
     public override void Shoot(Vector3 direction, float speed)
     {
-
+        _weapon.Shoot(_bulletPrefab, this, "Player", 5f);
     }
     
     public virtual void Attack()
@@ -65,6 +80,8 @@ public class Enemy: PlayableObject
     public override void Die()
     {
         Debug.Log($"{_name} Die");
+        SubtractEnemy();
+        Destroy(gameObject);
     }
 
     public void SetEnemyType(EEnemyType enemyType)
@@ -84,6 +101,10 @@ public class Enemy: PlayableObject
 
     public override void GetDamage(float damage)
     {
-        
+        _health.CurrentHealth -= (int)damage;
+        if (_health.CurrentHealth <= 0)
+        {
+            Die();
+        }
     }
 }

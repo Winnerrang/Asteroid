@@ -6,13 +6,37 @@ public abstract class PlayableObject : MonoBehaviour, IDamageable
 {
     public Health _health = new Health();
 
-    private Weapon _weapon;
+    protected Weapon _weapon;
 
-    public abstract void Move(Vector3 direction, Vector2 target);
+    [SerializeField]
+    protected float _speed;
 
-    public virtual void Move(Vector2 direction) { }
+    public virtual void Move(Transform target)
+    {
+        Vector2 diff = target.position - transform.position;
+        diff.Normalize();
+        transform.Translate(diff * _speed * Time.deltaTime, Space.World); 
 
-    public virtual void Move(float speed) { }
+    }
+    
+    public virtual void Move(Vector2 direction) 
+    { 
+        transform.Translate(direction * _speed * Time.deltaTime, Space.World); 
+    }
+
+    public virtual void RotateToward(Vector2 target)
+    {
+        Debug.Log(target);
+        Vector2 source = transform.position;
+        Vector2 diff;
+        //calculate the difference between target position and player position
+        diff = target - source;
+
+        //calculate the angle the player should be facing
+        float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg - 90;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
     public abstract void Shoot(Vector3 direction, float speed);
 
     public abstract void Die();

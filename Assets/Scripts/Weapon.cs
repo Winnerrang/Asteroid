@@ -26,9 +26,8 @@ public class Weapon
 
     public void Shoot(Bullet bullet, PlayableObject player, string targetting, float timeToDie)
     {
+        // the bullet travelling direction will the same as the player's facing direction
         Bullet tempBullet = GameObject.Instantiate(bullet, player.transform.position, player.transform.rotation);
-        tempBullet.SetBullet(_damage, _bulletSpeed);
-        GameObject.Destroy(tempBullet.gameObject, timeToDie);
-        // Shoots a bullet
+        tempBullet.SetBullet(_damage, _bulletSpeed, timeToDie, targetting);
     }
 }
