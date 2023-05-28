@@ -69,9 +69,14 @@ public class Enemy: PlayableObject
 
     public override void Shoot(Vector3 direction, float speed)
     {
-        _weapon.Shoot(_bulletPrefab, this, "Player", 5f);
+        _weapon.Shoot(_bulletPrefab, this, "Player", 5f, speed, direction);
     }
     
+    public void Shoot(float speed)
+    {
+        _weapon.Shoot(_bulletPrefab, this, "Player", 5f, speed);
+    }
+
     public virtual void Attack()
     {
 

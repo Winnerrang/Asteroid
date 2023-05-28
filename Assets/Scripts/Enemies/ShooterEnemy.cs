@@ -40,7 +40,7 @@ public class ShooterEnemy : Enemy
             _lineRenderer.SetPosition(1, _target.position);
             if (_timer >= _shootingInterval)
             {
-                Shoot(Vector3.zero, 0f);
+                Shoot(_bulletSpeed);
                 _timer = 0;
             }
         }

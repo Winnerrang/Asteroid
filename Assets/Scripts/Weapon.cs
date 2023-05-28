@@ -24,10 +24,25 @@ public class Weapon
         _bulletSpeed = bulletSpeed;
     }
 
-    public void Shoot(Bullet bullet, PlayableObject player, string targetting, float timeToDie)
+    public void Shoot(Bullet bulletPrefab, PlayableObject player, string targetting, float timeToDie)
     {
         // the bullet travelling direction will the same as the player's facing direction
-        Bullet tempBullet = GameObject.Instantiate(bullet, player.transform.position, player.transform.rotation);
+        Bullet tempBullet = GameObject.Instantiate(bulletPrefab, player.transform.position, player.transform.rotation);
         tempBullet.SetBullet(_damage, _bulletSpeed, timeToDie, targetting);
     }
+
+    public void Shoot(Bullet bulletPrefab, PlayableObject player, string targetting, float timeToDie, float bulletSpeed)
+    {
+        _bulletSpeed = bulletSpeed;
+        Shoot(bulletPrefab, player, targetting, timeToDie);
+    }
+
+    public void Shoot(Bullet bulletPrefab, PlayableObject player, string targetting, float timeToDie, float bulletSpeed, Vector3 direction)
+    {
+        _bulletSpeed = bulletSpeed;
+        Bullet tempBullet = GameObject.Instantiate(bulletPrefab, player.transform.position, Quaternion.LookRotation(direction));
+        tempBullet.SetBullet(_damage, _bulletSpeed, timeToDie, targetting);
+    }
+
+
 }
