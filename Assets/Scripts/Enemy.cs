@@ -40,32 +40,7 @@ public class Enemy: PlayableObject
         }
     }
 
-    //public override void Move(Vector3 direction, Vector2 target)
-    //{
-    //    Vector2 diff;
-    //    Debug.Log(target);
-    //    diff = target - (Vector2)transform.position;
 
-
-    //    // always face the enemy toward the player
-    //    float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg - 90;
-    //    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-    //    //Move the enemy toward the player
-    //    direction = diff.normalized;
-    //    transform.position += direction * _speed * Time.deltaTime;
-
-    //}
-
-    //public override void Move(Vector2 direction)
-    //{
-    //    transform.position = Vector2.MoveTowards(transform.position, _target.position, 0.01f);
-    //}
-
-    //public override void Move(float speed)
-    //{
-    //    transform.Translate(Vector2.right * speed * Time.deltaTime);
-    //}
 
     public override void Shoot(Vector3 direction, float speed)
     {

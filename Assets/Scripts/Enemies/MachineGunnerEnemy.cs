@@ -44,26 +44,5 @@ public class MachineGunnerEnemy : Enemy
 
     }
 
-    //public override void Move(Vector3 direction, Vector2 target)
-    //{
-    //    Vector2 diff;
-    //    Debug.Log(target);
-    //    diff = target - (Vector2)transform.position;
 
-    //    //Move the enemy toward the player
-    //    direction = diff.normalized;
-    //    transform.position += direction * _speed * Time.deltaTime;
-
-    //}
-
-    //public void Rotate(Vector2 target)
-    //{
-    //    Vector2 diff;
-    //    Debug.Log(target);
-    //    diff = target - (Vector2)transform.position;
-
-    //    // always face the enemy toward the player
-    //    float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg - 90;
-    //    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-    //}
 }
