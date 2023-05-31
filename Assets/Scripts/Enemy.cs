@@ -81,10 +81,13 @@ public class Enemy: PlayableObject
 
     public override void GetDamage(float damage)
     {
-        _health.CurrentHealth -= (int)damage;
-        if (_health.CurrentHealth <= 0)
-        {
-            Die();
-        }
+        GameManager.Instance.ScoreManagerInstance.IncrementScore(1);
+        Die();
+        
+        //_health.CurrentHealth -= (int)damage;
+        //if (_health.CurrentHealth <= 0)
+        //{
+        //    Die();
+        //}
     }
 }

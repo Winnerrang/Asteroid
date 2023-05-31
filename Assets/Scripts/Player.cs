@@ -51,7 +51,7 @@ public class Player: PlayableObject, IDamageable
 
     public override void Shoot(Vector3 direction, float speed)
     {
-        _weapon.Shoot(_bulletPrefab, this, "Enemy", _timeToDie);
+        _weapon.Shoot(_bulletPrefab, this, "Enemy", _timeToDie, _weaponSpeed);
     }
 
 

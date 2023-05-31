@@ -7,6 +7,15 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
+    [Header("Manager")]
+    [SerializeField]
+    private ScoreManager _scoreManager;
+    public ScoreManager ScoreManagerInstance => _scoreManager;
+
+    [SerializeField]
+    private UIManager _uiManager;
+    public UIManager UIManagerInstance => _uiManager;
+
     [SerializeField]
     List<GameObject> _enemyPrefabs;
 
@@ -16,6 +25,8 @@ public class GameManager : MonoBehaviour
     private float _timer = 0f;
 
     private GameObject tempObject;
+
+
 
     private void Awake()
     {

@@ -26,7 +26,6 @@ public abstract class PlayableObject : MonoBehaviour, IDamageable
 
     public virtual void RotateToward(Vector2 target)
     {
-        Debug.Log(target);
         Vector2 source = transform.position;
         Vector2 diff;
         //calculate the difference between target position and player position
