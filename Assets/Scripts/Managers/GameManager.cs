@@ -26,7 +26,10 @@ public class GameManager : MonoBehaviour
 
     private GameObject tempObject;
 
-
+    [Header("PowerUp")]
+    [SerializeField]
+    private NukeBag _nukeBag;
+    public NukeBag NukeBagInstance => _nukeBag;
 
     private void Awake()
     {
@@ -46,7 +49,8 @@ public class GameManager : MonoBehaviour
 
     void CreateRandomEnemy()
     {
-        int index = Random.Range(0, _enemyPrefabs.Count - 1);
+        //int index = Random.Range(0, _enemyPrefabs.Count);
+        int index = 2;
         tempObject = Instantiate(_enemyPrefabs[index], GenerateRandomPosition(), Quaternion.identity);
     }
 
@@ -71,11 +75,11 @@ public class GameManager : MonoBehaviour
             x = width / 2;
             y = x * slope;
         }
-        else if (degree > breakPoint && degree <= 2 * breakPoint)
+        else if (degree > breakPoint && degree <=  180 - breakPoint)
         {
             y = height / 2;
             x = y / slope;
-        }else if (degree > 2 * breakPoint && degree < 3 * breakPoint)
+        }else if (degree > 180 - breakPoint && degree < 180 + breakPoint)
         {
             x = - width/ 2;
             y = x * slope;
