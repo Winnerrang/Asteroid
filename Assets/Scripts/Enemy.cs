@@ -32,7 +32,7 @@ public class Enemy: PlayableObject
     {
         if (_target != null)
         {
-            Move(transform);
+            Move(_target);
         }
         else
         {
@@ -59,7 +59,8 @@ public class Enemy: PlayableObject
 
     public override void Die()
     {
-        Debug.Log($"{_name} Die");
+        //Debug.Log($"{_name} Die");
+        GameManager.Instance.ScoreManagerInstance.IncrementScore(1);
         SubtractEnemy();
         Destroy(gameObject);
     }
@@ -81,7 +82,7 @@ public class Enemy: PlayableObject
 
     public override void GetDamage(float damage)
     {
-        GameManager.Instance.ScoreManagerInstance.IncrementScore(1);
+        
         Die();
         
         //_health.CurrentHealth -= (int)damage;
