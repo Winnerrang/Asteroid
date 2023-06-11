@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplodingEnemy : Enemy
@@ -19,6 +17,12 @@ public class ExplodingEnemy : Enemy
         // no weapon for exploding enemy, it will explode itself
         _name = "Exploding Enemy";
         _weapon = null;
+    }
+
+    protected override void Update()
+    {
+        RotateToward(_target.position);
+        Move(_target);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
