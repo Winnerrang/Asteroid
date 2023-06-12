@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour
         _vertical = Input.GetAxis("Vertical");
         _lookTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             _player.Shoot(Vector3.zero, 0f);
         }

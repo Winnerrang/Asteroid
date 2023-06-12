@@ -31,6 +31,14 @@ public class GameManager : MonoBehaviour
     private NukeBag _nukeBag;
     public NukeBag NukeBagInstance => _nukeBag;
 
+    [SerializeField]
+    private GunPowerUpController _gunPowerUpController;
+    public GunPowerUpController GunPowerUpControllerInstance => _gunPowerUpController;
+
+    [Header("PlayerRelated")]
+    [SerializeField] private FiringRateController _firingRateController;
+    public FiringRateController FiringRateControllerInstance => _firingRateController;
+
     private void Awake()
     {
         if(_instance == null) _instance = this;

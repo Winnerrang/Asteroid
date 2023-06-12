@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _nukeArea;
     [SerializeField] private GameObject _nukeUIPrefab;
 
+    [Header("Gun")]
+    [SerializeField] private GunPowerUpUI _gunUI;
+
     public void OnEnable()
     {
         GameManager gameManager;
@@ -73,5 +76,10 @@ public class UIManager : MonoBehaviour
         }
         
         
+    }
+
+    public void SetGunUIFilledAmount(float amount)
+    {
+        _gunUI.SetFillAmount(amount);
     }
 }

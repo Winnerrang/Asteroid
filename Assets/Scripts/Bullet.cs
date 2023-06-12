@@ -37,7 +37,6 @@ public class Bullet: MonoBehaviour
     void Damage(IDamageable damageable)
     {
 
-        Debug.Log($"damage"); 
         damageable.GetDamage(_damage);
         Die();
     }
