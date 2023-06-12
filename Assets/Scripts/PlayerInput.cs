@@ -25,6 +25,13 @@ public class PlayerInput : MonoBehaviour
         {
             _player.Shoot(Vector3.zero, 0f);
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            GameManager.Instance.NukeBagInstance.UseNuke();
+        }
+
+
     }
 
     private void FixedUpdate()

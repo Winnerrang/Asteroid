@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour
 
     void CreateRandomEnemy()
     {
-        //int index = Random.Range(0, _enemyPrefabs.Count);
-        int index = 2;
+        int index = Random.Range(0, _enemyPrefabs.Count);
+
         tempObject = Instantiate(_enemyPrefabs[index], GenerateRandomPosition(), Quaternion.identity);
     }
 
