@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player: PlayableObject, IDamageable
 {
@@ -23,11 +24,16 @@ public class Player: PlayableObject, IDamageable
 
     private float _timer = 0f;
 
+    public UnityEvent<int> OnPlayerHealthChanged;
+
     private void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _firingRateController = GameManager.Instance.FiringRateControllerInstance;
         _weapon = new Weapon("Player's Weapon", _weaponDamage, _weaponSpeed);
+        _health.MaxHealth = 100;
+        _health.CurrentHealth = _health.MaxHealth;
+        OnPlayerHealthChanged?.Invoke(_health.CurrentHealth);
     }
 
     public void Move(Vector2 direction, Vector2 target)
@@ -50,12 +56,18 @@ public class Player: PlayableObject, IDamageable
 
     public override void Die()
     {
-        Debug.Log("Player Die");
+        gameObject.SetActive(false);
     }
 
     public override void GetDamage(float damage)
     {
-        Debug.Log("Player Take Damage");
+        _health.CurrentHealth -= (int) damage;
+
+        OnPlayerHealthChanged?.Invoke(_health.CurrentHealth);
+        if (_health.CurrentHealth <= 0)
+        {
+            Die();
+        }
     }
 
 

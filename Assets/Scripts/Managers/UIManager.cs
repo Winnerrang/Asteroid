@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,9 +7,17 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+
+    //#############################################################Health#######################################################//
+    [SerializeField]
+    private TextMeshProUGUI _healthUI;
+
+    //#############################################################Score#######################################################//
     [SerializeField]
     private TextMeshProUGUI _cuurentScoreUI, _highScoreUI;
 
+
+    //#############################################################Power Up#######################################################//
     [Header("Nuke")]
     [SerializeField] private GameObject _nukeArea;
     [SerializeField] private GameObject _nukeUIPrefab;
@@ -33,6 +42,15 @@ public class UIManager : MonoBehaviour
 
         //nuke
         gameManager.NukeBagInstance.OnNumberOfNukeChanged.AddListener(OnNumberOfNukeChanged);
+
+        //health
+        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player?.OnPlayerHealthChanged.AddListener(ChangeHealth);
+    }
+
+    private void ChangeHealth(int health)
+    {
+        _healthUI.text = health.ToString();
     }
 
     private void OnDisable()
@@ -41,6 +59,10 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.ScoreManagerInstance.OnHighScoreChanged.RemoveListener(ChangeHighScore);
 
         GameManager.Instance.NukeBagInstance.OnNumberOfNukeChanged.RemoveListener(OnNumberOfNukeChanged);
+
+        //health
+        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player?.OnPlayerHealthChanged.RemoveListener(ChangeHealth);
     }
 
     public void ChangeCurrentScore(int value)

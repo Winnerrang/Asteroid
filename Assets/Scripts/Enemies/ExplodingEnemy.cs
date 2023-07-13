@@ -21,6 +21,7 @@ public class ExplodingEnemy : Enemy
 
     protected override void Update()
     {
+        if (_target == null) return;
         RotateToward(_target.position);
         Move(_target);
     }

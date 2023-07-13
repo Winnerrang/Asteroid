@@ -25,6 +25,7 @@ public class MachineGunnerEnemy : Enemy
 
     protected override void Update()
     {
+        if (_target == null) return;
         RotateToward(_target.position);
         if (Vector3.Distance(transform.position, _target.position) >= _shootingRadius)
         {
