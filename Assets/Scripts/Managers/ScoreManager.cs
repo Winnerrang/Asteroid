@@ -17,6 +17,7 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         HighScore = PlayerPrefs.GetInt("HighScore", 0);
+        
         CurScore = 0;
     }
     private int CurScore
@@ -26,7 +27,9 @@ public class ScoreManager : MonoBehaviour
         {
             _curScore = value;
             OnCurScoreChanged?.Invoke(value);
-            
+
+            PlayerPrefs.SetInt("CurrentScore", _curScore);
+            PlayerPrefs.Save();
             if (_curScore > _highScore)
             {
                 HighScore = CurScore;

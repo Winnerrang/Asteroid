@@ -57,6 +57,7 @@ public class Player: PlayableObject, IDamageable
     public override void Die()
     {
         gameObject.SetActive(false);
+        SceneController.Instance.ChangeScene("GameOverScene");
     }
 
     public override void GetDamage(float damage)

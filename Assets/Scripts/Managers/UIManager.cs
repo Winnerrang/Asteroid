@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.NukeBagInstance.OnNumberOfNukeChanged.RemoveListener(OnNumberOfNukeChanged);
 
         //health
-        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        var player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Player>();
         player?.OnPlayerHealthChanged.RemoveListener(ChangeHealth);
     }
 
