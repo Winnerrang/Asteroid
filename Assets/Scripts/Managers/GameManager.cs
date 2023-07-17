@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
+
+    //############################################Manager########################################//
     [Header("Manager")]
     [SerializeField]
     private ScoreManager _scoreManager;
@@ -16,10 +18,26 @@ public class GameManager : MonoBehaviour
     private UIManager _uiManager;
     public UIManager UIManagerInstance => _uiManager;
 
+
+
+
+    //############################################Enemy Spawn########################################//
+
     [SerializeField]
     List<GameObject> _enemyPrefabs;
 
     [SerializeField]
+    float _initialSpawnInterval=3f;
+
+    [SerializeField]
+    float _maxSpawnRate = 10;
+
+    [Tooltip("The spawnInterval will decrease every 10s")]
+    [SerializeField]
+    float _spawnDerivative = 0.2f;
+
+    float _decreaseTimer;
+
     float _spawnInterval;
 
     private float _timer = 0f;
@@ -45,14 +63,46 @@ public class GameManager : MonoBehaviour
         else Destroy(_instance.gameObject);
     }
 
+    private void Start()
+    {
+        
+        _spawnInterval = _initialSpawnInterval;
+        _decreaseTimer = 0f;
+    }
+
     private void Update()
     {
+        IncreaseSpawnRate();
+
         _timer += Time.deltaTime;
-        if(_timer >= _spawnInterval)
+        if (_timer >= _spawnInterval)
         {
             _timer = 0f;
             CreateRandomEnemy();
         }
+    }
+
+    private void IncreaseSpawnRate()
+    {
+        float spawnRate = 1 / _spawnInterval;
+        
+        if (spawnRate >= _maxSpawnRate)
+        {
+            _spawnInterval = 1 / _maxSpawnRate;
+            return;
+        }
+
+        _decreaseTimer += Time.deltaTime;
+
+        if (_decreaseTimer >= 10f)
+        {
+            _decreaseTimer = 0f;
+            _spawnInterval -= _spawnDerivative;
+
+            _spawnInterval = Mathf.Clamp(_spawnInterval, 1 / _maxSpawnRate, float.MaxValue);
+            Debug.Log($"{1 / _maxSpawnRate}");
+        }
+
     }
 
     void CreateRandomEnemy()
