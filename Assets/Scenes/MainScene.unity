@@ -2276,7 +2276,9 @@ MonoBehaviour:
   - {fileID: 3145920082258450754, guid: 47488b3f3825e88408b665bae286eb13, type: 3}
   - {fileID: 3884967995780608186, guid: d8a2d4da59c04804488ac2f4f5f33d6f, type: 3}
   - {fileID: 3421583483164803990, guid: 1616007f9ab69db448866eb32c253858, type: 3}
-  _spawnInterval: 3
+  _initialSpawnInterval: 3
+  _maxSpawnRate: 10
+  _spawnDerivative: 0.2
   _nukeBag: {fileID: 1714261733}
   _gunPowerUpController: {fileID: 30917752}
   _firingRateController: {fileID: 1599837863}
