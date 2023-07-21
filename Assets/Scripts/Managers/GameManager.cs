@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
             _spawnInterval -= _spawnDerivative;
 
             _spawnInterval = Mathf.Clamp(_spawnInterval, 1 / _maxSpawnRate, float.MaxValue);
-            Debug.Log($"{1 / _maxSpawnRate}");
+            //Debug.Log($"{1 / _maxSpawnRate}");
         }
 
     }
