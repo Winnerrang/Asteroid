@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,9 @@ public class Player: PlayableObject, IDamageable
 
     [SerializeField]
     private Bullet _bulletPrefab;
+
+    [SerializeField]
+    private GameObject _dieEffectPrefab;
 
     private FiringRateController _firingRateController;
 
@@ -56,7 +60,16 @@ public class Player: PlayableObject, IDamageable
 
     public override void Die()
     {
+
+        GameObject DieVFX = Instantiate(_dieEffectPrefab, transform.position, Quaternion.identity);
+        Invoke("ChangeScene", 1.5f);
         gameObject.SetActive(false);
+        
+        
+    }
+
+    private void ChangeScene()
+    {
         SceneController.Instance.ChangeScene("GameOverScene");
     }
 

@@ -659,6 +659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _bulletPrefab: {fileID: 0}
+  _DieEffectPrefab: {fileID: 0}
 --- !u!212 &501811836
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1597,6 +1598,8 @@ MonoBehaviour:
   _timeToDie: 3
   _bulletPrefab: {fileID: 2482213141974663245, guid: eb4285bd057f96c408abde10be7f3923,
     type: 3}
+  _dieEffectPrefab: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b,
+    type: 3}
   OnPlayerHealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2348,6 +2351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _bulletPrefab: {fileID: 0}
+  _DieEffectPrefab: {fileID: 0}
   _attackRange: 0.3
 --- !u!212 &1789694798
 SpriteRenderer:

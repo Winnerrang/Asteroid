@@ -17,6 +17,9 @@ public class Enemy: PlayableObject
     [SerializeField]
     private Bullet _bulletPrefab;
 
+    [SerializeField]
+    private GameObject _DieEffectPrefab;
+
 
     public void Awake()
     {
@@ -60,7 +63,8 @@ public class Enemy: PlayableObject
     public override void Die()
     {
         //Debug.Log($"{_name} Die");
-        
+        GameObject DieVFX = Instantiate(_DieEffectPrefab, transform.position, Quaternion.identity);
+        Destroy(DieVFX, 1.5f);
         SubtractEnemy();
         Destroy(gameObject);
     }
