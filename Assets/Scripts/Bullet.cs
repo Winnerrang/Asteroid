@@ -72,6 +72,7 @@ public class Bullet: MonoBehaviour
             return;
         }
 
+
         IDamageable damageable = collision.GetComponent<IDamageable>();
         if (damageable != null)
         {

@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class NukeBag : MonoBehaviour
 {
     private int _number;
+    private AudioSource m_audioSource;
 
     public int Number
     {
@@ -19,6 +20,10 @@ public class NukeBag : MonoBehaviour
 
     public UnityEvent<int> OnNumberOfNukeChanged;
 
+    private void Awake()
+    {
+        m_audioSource = GetComponent<AudioSource>();
+    }
     public void UseNuke()
     {
         if (Number <= 0) return;
@@ -26,12 +31,14 @@ public class NukeBag : MonoBehaviour
         Number--;
 
         Enemy[] enemies = Object.FindObjectsOfType<Enemy>();
-
+        
         foreach (Enemy enemy in enemies)
         {
-            enemy.Die();
+            if (!enemy.IsDie)
+                enemy.Die();
         }
-        
+        m_audioSource.time = 0f;
+        m_audioSource.Play();
     }
 
 }

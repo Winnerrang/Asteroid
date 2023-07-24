@@ -24,13 +24,18 @@ public class Enemy: PlayableObject
 
     private SpriteRenderer m_spriteRenderer;
 
+    private Collider2D m_collider;
+
     protected bool m_isDie = false;
+
+    public bool IsDie => m_isDie;
 
     public void Awake()
     {
         AddEnemy();
         m_spriteRenderer = transform.Find("Texture").GetComponent<SpriteRenderer>();
         m_audioSource = GetComponent<AudioSource>();
+        m_collider = GetComponent<Collider2D>();
     }
 
     protected virtual void Start()
@@ -71,6 +76,7 @@ public class Enemy: PlayableObject
     {
         //Debug.Log($"{_name} Die");
         m_isDie = true;
+        m_collider.enabled = false;
         GameObject DieVFX = Instantiate(_DieEffectPrefab, transform.position, Quaternion.identity);
         Destroy(DieVFX, 1.5f);
         SubtractEnemy();
