@@ -29,7 +29,7 @@ public class NukeBag : MonoBehaviour
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.GetDamage(9999999f);
+            enemy.Die();
         }
         
     }

@@ -26,7 +26,7 @@ public class ShooterEnemy : Enemy
 
     protected override void Update()
     {
-        if (_target == null) return;
+        if (_target == null || m_isDie) return;
 
         RotateToward(_target.position);
 
@@ -52,4 +52,10 @@ public class ShooterEnemy : Enemy
 
     }
 
+    public override void Die()
+    {
+        _lineRenderer.positionCount = 0;
+        base.Die();
+        
+    }
 }

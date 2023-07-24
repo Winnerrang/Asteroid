@@ -14,6 +14,10 @@ public class Bullet: MonoBehaviour
     [SerializeField]
     private string _targetTag;
 
+    [SerializeField]
+    private SpriteRenderer m_spriteRenderer;
+
+
     private float _timeToDie;
 
     private bool _isDie = false;
@@ -38,6 +42,7 @@ public class Bullet: MonoBehaviour
     {
 
         damageable.GetDamage(_damage);
+
         Die();
     }
 
@@ -48,9 +53,17 @@ public class Bullet: MonoBehaviour
             return;
         }
         _isDie = true;
-        Destroy(gameObject);
+
+        StartCoroutine(DieCoroutine());
+        
     }
 
+    IEnumerator DieCoroutine()
+    {
+        m_spriteRenderer.enabled = false;       
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
 

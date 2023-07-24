@@ -20,10 +20,17 @@ public class Enemy: PlayableObject
     [SerializeField]
     private GameObject _DieEffectPrefab;
 
+    private AudioSource m_audioSource;
+
+    private SpriteRenderer m_spriteRenderer;
+
+    protected bool m_isDie = false;
 
     public void Awake()
     {
         AddEnemy();
+        m_spriteRenderer = transform.Find("Texture").GetComponent<SpriteRenderer>();
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void Start()
@@ -63,12 +70,19 @@ public class Enemy: PlayableObject
     public override void Die()
     {
         //Debug.Log($"{_name} Die");
+        m_isDie = true;
         GameObject DieVFX = Instantiate(_DieEffectPrefab, transform.position, Quaternion.identity);
         Destroy(DieVFX, 1.5f);
         SubtractEnemy();
-        Destroy(gameObject);
+        m_spriteRenderer.enabled = false;
+        StartCoroutine(DestroyCoroutine());
     }
 
+    private IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
+    }
     public void SetEnemyType(EEnemyType enemyType)
     {
         _enemyType = enemyType;
@@ -87,6 +101,8 @@ public class Enemy: PlayableObject
     public override void GetDamage(float damage)
     {
         GameManager.Instance.ScoreManagerInstance.IncrementScore(1);
+
+        m_audioSource.Play();
         Die();
         
         //_health.CurrentHealth -= (int)damage;

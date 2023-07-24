@@ -187,6 +187,7 @@ MonoBehaviour:
   _damage: 1.68
   _speed: 2.61
   _targetTag: 
+  m_spriteRenderer: {fileID: 532444993715077702}
 --- !u!58 &1991657367398621552
 CircleCollider2D:
   m_ObjectHideFlags: 0

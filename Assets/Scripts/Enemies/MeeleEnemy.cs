@@ -9,6 +9,7 @@ public class MeeleEnemy : Enemy
 
     protected override void Update()
     {
+        if (m_isDie) return;
         base.Update();
 
         if (Vector2.Distance(transform.position, _target.position) < _attackRange)

@@ -21,20 +21,20 @@ public class ExplodingEnemy : Enemy
 
     protected override void Update()
     {
-        if (_target == null) return;
+        if (_target == null || m_isDie) return;
         RotateToward(_target.position);
         Move(_target);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (m_isDie) return;
         if (collision.gameObject.tag == "Player")
         {
             // if the enemy collides with the player, it will explode
             Player p = collision.gameObject.GetComponent<Player>();
             p.GetDamage(_explodeDamage);
-            Die();
+            GetDamage(9999999f);
         }
     }
 
