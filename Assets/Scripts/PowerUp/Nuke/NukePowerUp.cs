@@ -5,6 +5,8 @@ using UnityEngine;
 public class NukePowerUp : PowerUp
 
 {
+
+
     public override void PickUp()
     {
         GameManager.Instance.NukeBagInstance.Number++;

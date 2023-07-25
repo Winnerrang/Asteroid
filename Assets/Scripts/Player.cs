@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -44,6 +45,16 @@ public class Player: PlayableObject, IDamageable
     {
         RotateToward(target);
         Move(direction);
+        CheckBoundary();
+    }
+
+    private void CheckBoundary()
+    {
+        Vector3 position = transform.position;
+
+        position.x = Math.Clamp(position.x, Border.Instance.minX, Border.Instance.maxX);
+        position.y = Math.Clamp(position.y, Border.Instance.minY, Border.Instance.maxY);
+        transform.position = position;
     }
 
     public override void Shoot(Vector3 direction, float speed)

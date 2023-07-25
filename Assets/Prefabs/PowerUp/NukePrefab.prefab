@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7378883118826184415}
   - component: {fileID: 8455413497096152469}
   - component: {fileID: 464347509}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: NukePrefab
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1733555614992914818}
   - component: {fileID: 3867785029301010117}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Texture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
